@@ -28,6 +28,8 @@ def predict():
     # Convert input data to DataFrame
     new_data_df = pd.DataFrame([input_data])
     print("New data:", new_data_df)
+    print("New data shape:", new_data_df.shape)
+    
 
     # One-hot encode categorical variables
     new_data_encoded = pd.get_dummies(new_data_df, columns=['sex', 'cp', 'restecg', 'exang', 'slope', 'ca', 'thal'])

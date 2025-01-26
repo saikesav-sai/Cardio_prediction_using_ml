@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import "./App.css";
+
 
 const HeartDiseasePrediction = () => {
   const [formData, setFormData] = useState({
@@ -18,6 +20,9 @@ const HeartDiseasePrediction = () => {
   });
 
   const [prediction, setPrediction] = useState(null);
+ 
+
+  
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,6 +34,14 @@ const HeartDiseasePrediction = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Check if any field is empty
+    for (const field in formData) {
+      if (formData[field] === "") {
+        alert("Please enter all values");
+        return; // Stop the form from being submitted
+      }
+    }
 
     const inputData = {
       age: formData.age,
@@ -63,151 +76,98 @@ const HeartDiseasePrediction = () => {
   };
 
   return (
-    <div>
-      <h1>Heart Disease Prediction</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Age:
-          <input
-            type="number"
-            name="age"
-            value={formData.age}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Sex (0 for Female, 1 for Male):
-          <input
-            type="number"
-            name="sex"
-            value={formData.sex}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Chest Pain Type (cp):
-          <input
-            type="number"
-            name="cp"
-            value={formData.cp}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Resting Blood Pressure (trestbps):
-          <input
-            type="number"
-            name="trestbps"
-            value={formData.trestbps}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Cholesterol Level (chol):
-          <input
-            type="number"
-            name="chol"
-            value={formData.chol}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Fasting Blood Sugar (fbs):
-          <input
-            type="number"
-            name="fbs"
-            value={formData.fbs}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Resting Electrocardiographic Results (restecg):
-          <input
-            type="number"
-            name="restecg"
-            value={formData.restecg}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Maximum Heart Rate (thalach):
-          <input
-            type="number"
-            name="thalach"
-            value={formData.thalach}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Exercise Induced Angina (exang):
-          <input
-            type="number"
-            name="exang"
-            value={formData.exang}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          ST Depression Induced by Exercise Relative to Rest (oldpeak):
-          <input
-            type="number"
-            name="oldpeak"
-            value={formData.oldpeak}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Slope of Peak Exercise ST Segment (slope):
-          <input
-            type="number"
-            name="slope"
-            value={formData.slope}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Number of Major Vessels Colored by Fluoroscopy (ca):
-          <input
-            type="number"
-            name="ca"
-            value={formData.ca}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <label>
-          Thalassemia (thal):
-          <input
-            type="number"
-            name="thal"
-            value={formData.thal}
-            onChange={handleChange}
-          />
-        </label>
-        <br />
-        <button type="submit">Submit</button>
+    <div className="container">
+      <h1 className="title">Heart Disease Prediction</h1>
+      <form className="form" onSubmit={handleSubmit}>
+            {[
+      { label: "Age", name: "age" },
+      { label: "Sex (0 for Female, 1 for Male)", name: "sex" },
+      { label: "Chest Pain Type (cp)", name: "cp" },
+      { label: "Resting Blood Pressure (trestbps)", name: "trestbps" },
+      { label: "Cholesterol Level (chol)", name: "chol" },
+      { label: "Fasting Blood Sugar (fbs)", name: "fbs" },
+      { label: "Resting Electrocardiographic Results (restecg)", name: "restecg" },
+      { label: "Maximum Heart Rate (thalach)", name: "thalach" },
+      { label: "Exercise Induced Angina (exang)", name: "exang" },
+      { label: "ST Depression Induced by Exercise Relative to Rest (oldpeak)", name: "oldpeak" },
+      { label: "Slope of Peak Exercise ST Segment (slope)", name: "slope" },
+      { label: "Number of Major Vessels Colored by Fluoroscopy (ca)", name: "ca" },
+      { label: "Thalassemia (thal)", name: "thal" },
+    ].map((field) => (
+      <div className="form-group" key={field.name}>
+        <label>{field.label}:</label>
+        <input
+          className="form-input"
+          type="number"
+          name={field.name}
+          value={formData[field.name]}
+          onChange={handleChange}
+        />
+      </div>
+    ))}
+    <div className="form-links"> 
+          <a
+            href="#"
+            className="form-link-sample"
+            onClick={(e) => {
+              e.preventDefault();
+              setFormData({
+                age: 54,
+                sex: 1,
+                cp: 0,
+                trestbps: 122,
+                chol: 286,
+                fbs: 0,
+                restecg: 0,
+                thalach: 116,
+                exang: 1,
+                oldpeak: 3.2,
+                slope: 1,
+                ca: 2,
+                thal: 2,
+              });
+            }}
+          >
+            Sample Input - Predict No Heart Disease
+          </a>
+          <a
+            href="#"
+            className="form-link-sample"
+            onClick={(e) => {
+              e.preventDefault();
+              setFormData({
+                age: 49,
+                sex: 1,
+                cp: 2,
+                trestbps: 118,
+                chol: 149,
+                fbs: 0,
+                restecg: 0,
+                thalach: 126,
+                exang: 0,
+                oldpeak: 0.8,
+                slope: 2,
+                ca: 3,
+                thal: 2,
+              });
+            }}
+          >
+            Sample Input - Predict Heart Disease
+          </a>
+        </div>
+
+      <button className="form-button" type="submit">Submit</button>
       </form>
 
       {prediction !== null && (
-        <div>
-          <h3>
-            Prediction:{" "}
-            {prediction === 1 ? "Heart Disease" : "No Heart Disease"}
+        <div className="prediction-container">
+          <h3 className="prediction-text">
+            Prediction: {prediction === 1 ? "Heart Disease" : "No Heart Disease"}
           </h3>
-        </div>
-      )}
     </div>
+  )}
+</div>
+
   );
 };
 
