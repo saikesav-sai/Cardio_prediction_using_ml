@@ -59,8 +59,10 @@ const HeartDiseasePrediction = () => {
       thal: formData.thal,
     };
 
+    const API_URL = 'http://192.168.1.6:5000/predict'; // Update with your API URL
+
     try {
-      const response = await fetch("http://localhost:5000/predict", {
+      const response = await fetch(API_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
