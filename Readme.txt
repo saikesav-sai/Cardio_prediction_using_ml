@@ -4,13 +4,15 @@ python app.py
 
 
 # Then go to front_end folder 
-#Type this in the terminal to install dependencies
+# In src folder open app.js and change the ipv4 address to your ipv4 addres
+
+# Then Type this in the terminal to install dependencies
 
 npm install
 
-#Then type 
+#Then type to start the application 
 
-npm start to start the application 
+npm start 
 
 # Terminate all the running programs after usage 
 
